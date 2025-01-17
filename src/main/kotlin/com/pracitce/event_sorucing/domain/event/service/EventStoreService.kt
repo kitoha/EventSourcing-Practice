@@ -25,4 +25,8 @@ class EventStoreService (
       objectMapper.readValue(it.eventPayload, OrderEvent::class.java)
     }
   }
+
+  fun findAllEvents(): List<OrderEvent>{
+    return repository.findAll().map { storedEvent -> objectMapper.readValue(storedEvent.eventPayload, OrderEvent::class.java) }
+  }
 }
